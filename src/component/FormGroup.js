@@ -129,7 +129,7 @@ function FormGroup(){
                                 close
                             </button>
                             <ModalCard
-                                data = {formData}
+                                //data = {FormData}
                                 userName = {formData["uname"]}
                                 userJob = {formData["ujob"]}
                                 userDom = {formData["udom"]}

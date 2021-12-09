@@ -20,7 +20,7 @@ function ModalCard(props){
                             marginTop: 30,
                             borderRadius: 10
                         }}
-                        src={props.Photo} 
+                        src={props.userPhoto} 
                         alt="ava"
                     />
                     </td>
@@ -28,18 +28,18 @@ function ModalCard(props){
                <tr>
                    <td>
                         <p className="textName">
-                            {props.Name}
+                            {props.userName}
                         </p>
                    </td>
                </tr>
                <tr>
                    <td>
                         <p className="textJob">
-                            {props.Job}
+                            {props.userJob}
                         </p>
                         <div className="textDom">
                             < AiFillEnvironment />
-                            <span> {props.Dom} </span>
+                            <span> {props.userDom} </span>
                         </div>
                     </td>
                </tr>
@@ -47,15 +47,15 @@ function ModalCard(props){
                    <td>
                         <div className="textSoc">
                             < AiTwotonePhone />
-                            <span> {props.Phone} </span>
+                            <span> {props.userPhone} </span>
                         </div>
                         <div className="textSoc">
                             < AiOutlineGithub />
-                            <span> {props.Git} </span>
+                            <span> {props.userGit} </span>
                         </div>
                         <div className="textSoc">
                             < AiOutlineMail />
-                            <span> {props.Email} </span>
+                            <span> {props.userEmail} </span>
                         </div>
                    </td>
                </tr>
