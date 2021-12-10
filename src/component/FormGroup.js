@@ -36,11 +36,14 @@ let formElements = [
     }
 ]
 
+// let listData = []
 function FormGroup(){
     const [formData, setFormData] = useState([{}]);
 
     const handleChange = (value, key) => {
-        setFormData(formData => ({...formData, ...{ [key]: value }}));
+        // setFormData(formData => ({...formData, [key]: value }
+        // ));
+        setFormData (formData => ({...formData, [key]: value}))
         //ini yang ditaroh di submit sama imam
     }
 
@@ -58,6 +61,7 @@ function FormGroup(){
     const setModalIsOpenToTrue =()=> {
         setModalIsOpen(true)
         console.log(formData);
+        console.log(setFormData.length);
     }
 
     // const setModalIsOpenToFalse =()=> {
@@ -72,11 +76,20 @@ function FormGroup(){
         }
     }
 
-    const submitHandler = (e) => {
-        e.preventDefault();
-        setModalIsOpen(true);
-        setFormData([...formData[e], {formData}]);
-    }
+    // const submitHandler = (e) => {
+    //     e.preventDefault();
+    //     setModalIsOpen(true);
+    //     setFormData([...formData, {
+    //         "id": formData.length + 1,
+    //         "username": formData["uname"],
+    //         "userjob": formData["ujob"],
+    //         "userdom": formData["udom"],
+    //         "userphoto": {selectedImg},
+    //         "useremail": formData["uemail"],
+    //         "userphone": formData["uphone"],
+    //         "usergit": formData["ugit"],
+    //     }]);
+    // }
 
     const closeHandler = () => {
         setModalIsOpen(false)
@@ -84,7 +97,8 @@ function FormGroup(){
 
     return(
         <div className='card'>
-            <form id='form-group' onSubmit={submitHandler}>
+            {/* <form id='form-group' onSubmit={submitHandler}> */}
+            <form id='form-group'>
                 {formElements.map(formElement =>{
                 return <div key={formElement.key}> 
                     <div className='form-label'>
@@ -128,16 +142,19 @@ function FormGroup(){
                             >
                                 close
                             </button>
-                            <ModalCard
-                                //data = {FormData}
-                                userName = {formData["uname"]}
-                                userJob = {formData["ujob"]}
-                                userDom = {formData["udom"]}
-                                userPhoto = {selectedImg}
-                                userPhone = {formData["uphone"]}
-                                userGit = {formData["ugit"]}
-                                userEmail = {formData["uemail"]}
-                            />
+                            {/* { listData.map (listData => { */}
+                                {/* return <div key={listData.length}> */}
+                                    <ModalCard
+                                        userName = {formData["uname"]}
+                                        userJob = {formData["ujob"]}
+                                        userDom = {formData["udom"]}
+                                        userPhoto = {selectedImg}
+                                        userPhone = {formData["uphone"]}
+                                        userGit = {formData["ugit"]}
+                                        userEmail = {formData["uemail"]}
+                                    />
+                                {/* </div> */}
+                            {/* })} */}
                     </Modal>
                 </div>
             </form>
