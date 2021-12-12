@@ -43,7 +43,7 @@ let formElements = [
 ]
 
 // let listData = []
-function FormGroup(props){
+function FormGroup(){
     // const [formData, setFormData] = useState([{}]);
     const [formData, setFormData] = useState([]);
     const [listData, setListData] = useState([]);
@@ -83,11 +83,11 @@ function FormGroup(props){
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     //Const itu Arrow component
-    const setModalIsOpenToTrue =()=> {
-        setModalIsOpen(true)
-        console.log(formData);
-        console.log(setFormData.length);
-    }
+    // const setModalIsOpenToTrue =()=> {
+    //     setModalIsOpen(true)
+    //     console.log(formData);
+    //     console.log(setFormData.length);
+    // }
 
     // const setModalIsOpenToFalse =()=> {
     //     setModalIsOpen(false)
@@ -199,7 +199,6 @@ function FormGroup(props){
                                     userPhone = {user.uphone}
                                     userGit = {user.ugit}
                                     userEmail = {user.uemail}
-                                    userPhoto = {selectedImg}
                                 />
                             ))
                         }
