@@ -58,9 +58,9 @@ function FormGroup(){
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const modalStyle = {
         content : {
-            top: '40%',
+            top: '2%',
             left: '30%',
-            transform: 'translate(-20%, -40%)'
+            transform: 'translate(-20%, 5%)'
         }
     }
 
