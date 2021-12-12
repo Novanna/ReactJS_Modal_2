@@ -5,46 +5,61 @@ import './FormGroup.css'
 
 let formElements = [
     {
-        key: 'uname',
+        key: '1',
+        name: 'uname',
         label: 'Name',
         placeholder: "Type your full name here"
     },
     {
-        key: 'ujob',
+        key: '2',
+        name: 'ujob',
         label: 'Job',
         placeholder: "Type your current job here"
     },
     {
-        key: 'udom',
+        key: '3',
+        name: 'udom',
         label: 'Domicile',
         placeholder: "Type your domicile (city) here"
     },
     {
-        key: 'uphone',
+        key: '4',
+        name: 'uphone',
         label: 'Phone Number',
         placeholder: "+(62)"
     },
     {
-        key: 'ugit',
+        key: '5',
+        name: 'ugit',
         label: 'GitHub',
         placeholder: "github.com/"
     },
     {
-        key: 'uemail',
+        key: '6',
+        name: 'uemail',
         label: 'Email',
         placeholder: 'youremail@bla.com'
     }
 ]
 
 // let listData = []
-function FormGroup(){
-    const [formData, setFormData] = useState([{}]);
+function FormGroup(props){
+    // const [formData, setFormData] = useState([{}]);
+    const [formData, setFormData] = useState([]);
+    const [listData, setListData] = useState([]);
+    // const [listData, setListData] = useState([{uname: 'Novanna', ujob:'developer'}, {uname: 'Jungkook', ujob:'artist'}]);
 
-    const handleChange = (value, key) => {
-        // setFormData(formData => ({...formData, [key]: value }
-        // ));
-        setFormData (formData => ({...formData, [key]: value}))
-        //ini yang ditaroh di submit sama imam
+    // const handleChange = (value, key) => {
+    //     // setFormData(formData => ({...formData, [key]: value }
+    //     // ));
+    //     setFormData (formData => ({...formData, [key]: value}))
+    //     //ini yang ditaroh di submit sama imam 
+    // }
+
+    const handleChange = (value, name) => {
+        setFormData({
+            ...formData, [name]: value,
+        })
     }
 
     const [selectedImg, setSelectedImg] = useState("");
@@ -52,6 +67,16 @@ function FormGroup(){
     const addImgHandler = (e) => {
         let src = URL.createObjectURL(e.target.files[0]);
         setSelectedImg(src);
+    }
+
+    const submitHandler = () => {
+        setModalIsOpen(true)
+        setListData([
+            ...listData, [formData.uname, formData.ujob, selectedImg, formData.udom, formData.uphone, formData.uemail, formData.ugit]
+        ])
+        console.log(formData);
+        console.log(listData);
+        // props.onSubmitData(formData);
     }
 
     //modal
@@ -78,41 +103,50 @@ function FormGroup(){
 
     // const submitHandler = (e) => {
     //     e.preventDefault();
-    //     setModalIsOpen(true);
-    //     setFormData([...formData, {
-    //         "id": formData.length + 1,
-    //         "username": formData["uname"],
-    //         "userjob": formData["ujob"],
-    //         "userdom": formData["udom"],
-    //         "userphoto": {selectedImg},
-    //         "useremail": formData["uemail"],
-    //         "userphone": formData["uphone"],
-    //         "usergit": formData["ugit"],
-    //     }]);
+    //     this.setState(prevState =>{
+    //         setModalIsOpen(true);
+    //         return{
+    //             count: prevState.count + 1,
+    //             setFormData([formData, {
+    //                         "username": userName,
+    //                         "userjob": userJob,
+    //                         "userdom": userDom,
+    //                         "userphoto": userPhoto,
+    //                         "useremail": userEmail,
+    //                         "userphone": userPhone,
+    //                         "usergit": userGit }
+    //                     ])}
+    //     })
+    // }
+
+    // const submitHandler = () => {
+    //     this.setState(prevState => ({
+    //         formData: [...prevState.formData, formData]
+    //     }))
     // }
 
     const closeHandler = () => {
         setModalIsOpen(false)
     }
+    // const dataLength = props.data.length;
 
     return(
         <div className='card'>
             {/* <form id='form-group' onSubmit={submitHandler}> */}
             <form id='form-group'>
-                {formElements.map(formElement =>{
-                return <div key={formElement.key}> 
-                    <div className='form-label'>
-                        {formElement.label}
+                {formElements.map(formElement => (
+                    <div key={formElement.key}> 
+                        <div className='form-label'> {formElement.label} </div>
+                        <input 
+                            className='form-input'
+                            placeholder={formElement.placeholder}
+                            name={formElement.name}
+                            onChange={(e) =>{
+                                handleChange(e.target.value, formElement.name)
+                            }}
+                        />
                     </div>
-                    <input 
-                    className='form-input'
-                    placeholder={formElement.placeholder}
-                    onChange={(e) =>{
-                        handleChange(e.target.value, formElement.key)
-                        }}
-                    />
-                </div>
-                })}
+                ))}
                 
                 <p className="form-label">
                     Photo
@@ -126,10 +160,53 @@ function FormGroup(){
                 <button
                     className="btn"
                     onClick= { (e) => {e.preventDefault();
+                        submitHandler() }}
+                > Process </button>
+                {/* <button
+                    className="btn"
+                    onClick= { (e) => {e.preventDefault();
                         setModalIsOpenToTrue() }}
-                >Process</button>
+                > Process </button> */}
+            </form>
+                
+                {/* {listData.map (data => {
+                    return <div key={data.uname}>
+                        <ModalCard 
+                            userName = {data.uname}
+                        />
+                    </div>
+                })} */}
+
 
                 <div>
+                    <Modal
+                        isOpen={modalIsOpen}
+                        style={modalStyle}
+                        ariaHideApp={false}
+                        onRequestClose={() => setModalIsOpen(true)}
+                    >
+                        <button 
+                                className="btn-close" 
+                                onClick={closeHandler}
+                        > close </button>
+                        {
+                            listData.map((user) => (
+                                <ModalCard 
+                                    userName = {user.uname}
+                                    userJob = {user.ujob}
+                                    userDom = {user.udom}
+                                    userPhoto = {user.uphoto}
+                                    userPhone = {user.uphone}
+                                    userGit = {user.ugit}
+                                    userEmail = {user.uemail}
+                                    userPhoto = {selectedImg}
+                                />
+                            ))
+                        }
+                    </Modal>
+                </div>
+                {/* Modal 1 */}
+                {/* <div>
                     <Modal
                     isOpen={modalIsOpen}
                     style={modalStyle}
@@ -144,7 +221,7 @@ function FormGroup(){
                             </button>
                             {/* { listData.map (listData => { */}
                                 {/* return <div key={listData.length}> */}
-                                    <ModalCard
+                                    {/* <ModalCard
                                         userName = {formData["uname"]}
                                         userJob = {formData["ujob"]}
                                         userDom = {formData["udom"]}
@@ -152,12 +229,11 @@ function FormGroup(){
                                         userPhone = {formData["uphone"]}
                                         userGit = {formData["ugit"]}
                                         userEmail = {formData["uemail"]}
-                                    />
+                                    /> */}
                                 {/* </div> */}
                             {/* })} */}
-                    </Modal>
-                </div>
-            </form>
+                    {/* </Modal> */}
+                {/* </div> */}
         </div>
     )
 }
