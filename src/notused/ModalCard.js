@@ -1,5 +1,3 @@
-import './FormGroup';
-import './ModalCard.css';
 import { AiFillEnvironment } from 'react-icons/ai';
 import { AiOutlineMail } from 'react-icons/ai';
 import { AiOutlineGithub } from 'react-icons/ai';

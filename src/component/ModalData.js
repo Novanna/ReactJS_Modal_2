@@ -1,5 +1,5 @@
 import React from 'react';
-import ModalCard from '../component/ModalCard';
+import ModalCard from './ModalCard';
 import './ModalCard.css';
 
 function ModalData(props){

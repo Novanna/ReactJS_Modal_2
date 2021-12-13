@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import Modal from 'react-modal';
-import ModalCard from './ModalCard';
-import './FormGroup.css'
+//import ModalCard from './ModalCard';
+import ModalData from './ModalData';
+import './FormGroup.css';
 
 let formElements = [
     {
@@ -65,15 +66,34 @@ function FormGroup(){
     const [selectedImg, setSelectedImg] = useState("");
 
     const addImgHandler = (e) => {
-        let src = URL.createObjectURL(e.target.files[0]);
-        setSelectedImg(src);
+        let src = setSelectedImg(URL.createObjectURL(e.target.files[0]))
+        setFormData(selectedImg => ({...selectedImg, name:src}))
     }
 
-    const submitHandler = () => {
+    const submitHandler = (e) => {
+        e.preventDefault()
         setModalIsOpen(true)
         setListData([
-            ...listData, [formData.uname, formData.ujob, selectedImg, formData.udom, formData.uphone, formData.uemail, formData.ugit]
+            ...listData, {
+                "key": formData.key,
+                "uname": formData.uname, 
+                "ujob": formData.ujob, 
+                "uphoto": selectedImg, 
+                "udom": formData.udom, 
+                "uphone":formData.uphone, 
+                "uemail": formData.uemail, 
+                "ugit": formData.ugit
+            }
         ])
+        setFormData([{
+            uname:"",
+            ujob:"",
+            udom:"",
+            uphone:"",
+            uemail:"",
+            ugit:"",
+            uphoto:"",
+        }])
         console.log(formData);
         console.log(listData);
         // props.onSubmitData(formData);
@@ -99,6 +119,21 @@ function FormGroup(){
             left: '30%',
             transform: 'translate(-20%, -40%)'
         }
+    }
+
+    const resetHandler = (e) => {
+        e.preventDefault();
+        setListData([])
+        setFormData({
+            uname: '',
+            ujob: '',
+            udom: '',
+            uphone:'',
+            uemail:'',
+            ugit:'',
+            uphoto:''
+        })
+        alert('Reset Modal Success!')
     }
 
     // const submitHandler = (e) => {
@@ -159,9 +194,13 @@ function FormGroup(){
 
                 <button
                     className="btn"
-                    onClick= { (e) => {e.preventDefault();
-                        submitHandler() }}
+                    onClick= {submitHandler}
                 > Process </button>
+
+                <button
+                    className="btn"
+                    onClick= {resetHandler}
+                > Reset </button>
                 {/* <button
                     className="btn"
                     onClick= { (e) => {e.preventDefault();
@@ -189,19 +228,17 @@ function FormGroup(){
                                 className="btn-close" 
                                 onClick={closeHandler}
                         > close </button>
-                        {
-                            listData.map((user) => (
-                                <ModalCard 
-                                    userName = {user.uname}
-                                    userJob = {user.ujob}
-                                    userDom = {user.udom}
-                                    userPhoto = {user.uphoto}
-                                    userPhone = {user.uphone}
-                                    userGit = {user.ugit}
-                                    userEmail = {user.uemail}
-                                />
-                            ))
-                        }
+                        
+                            <ModalData
+                                data = {formData}
+                                uname = {formData.uname}
+                                job = {formData.ujob}
+                                domicile = {formData.udom}
+                                phone = {formData.uphone}
+                                email = {formData.uemail}
+                                git = {formData.ugit}
+                                photo = {selectedImg}
+                            />
                     </Modal>
                 </div>
                 {/* Modal 1 */}

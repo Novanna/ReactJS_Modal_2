@@ -1,35 +1,27 @@
-// import React from 'react'
-// import './ModalCard.css'
-// import ModalCard from './ModalCard'
-// ///Gak jadi pake ini, map gak bisa
+import React from 'react';
+import ModalCard from './ModalCard';
+import './ModalCard.css';
 
-// const ModalData = (props) => {
-//     return(
-//         <>
-//         <div>
-//             <h1>ini apa?</h1>
-            
-//             { props.setFormData.map((dataList => (
-//                 <ModalCard
-//                     Nama={dataList.userName}
-//                     Job={dataList.userJob}
-//                     Dom={dataList.userDom}
-//                     Photo={dataList.userPhoto}
-//                     Phone={dataList.userPhone}
-//                     Git={dataList.userGit}
-//                     Email={dataList.userEmail} />
-//                 )))
-        
-//             <button
-//                 class='btn'
-//                 onClick={props.onClose} 
-//                 type="button"
-//             >
-//                 Reset Data
-//             </button>
-//         </div>
-//         </>
-//     )
-// }
-
-// export default ModalData;
+function ModalData(props){
+return(
+    <>
+    <div>
+        {props.data.map(user => (
+            <div key={user.key}>
+                <ModalCard 
+                    key = {user.length}
+                    userName = {user.uname}
+                    userJob = {user.job}
+                    userDom = {user.domicile}
+                    userPhone = {user.phone}
+                    userEmail = {user.email}
+                    userGit = {user.git}
+                    userPhoto = {user.photo}
+                />
+            </div>
+        ))}
+    </div>
+    </>
+)
+}
+export default ModalData;
