@@ -5,6 +5,10 @@ import ModalData from '../component/ModalData';
 import './FormGroup.css';
 
 function FormGroup(){
+
+    const [formData, setFormData] = useState([])
+    const [formFile, setFormFile] = useState('')
+
     const data = {
         uname:"",
         job:"",
@@ -14,20 +18,17 @@ function FormGroup(){
         git:"",
     }
 
-    const [formData, setFormData] = useState([])
-    const [formFile, setFormFile] = useState('')
-
     const [{uname,job,domicile,phone,email,git}, 
         setData] = useState(data);
 
     const handleChange = (e) => {
         const {name, value} = e.target;
-        setData(prevState => ({...prevState, [name]: value}))
+        setData(formData => ({...formData, [name]: value}))
     }
 
     const addImgHandler = (e) => {
         let src = setFormFile(URL.createObjectURL(e.target.files[0]))
-        setData(prevState => ({...prevState, name: src}))
+        setData(formFile => ({...formFile, name: src}))
     }
 
     const submitHandler = (e) => {
@@ -97,9 +98,6 @@ function FormGroup(){
                     value={uname}
                     onChange={handleChange}
                 />
-            </form>
-
-            <form className='form-group'>
                 <div className='form-label'>Current Job</div>
                 <select
                     className='form-select'
@@ -113,9 +111,6 @@ function FormGroup(){
                     <option value="Fullstack Developer"> Fullstack Developer </option>
                     <option value="Data Scientist"> Data Scientist </option>
                 </select>
-            </form>
-
-            <form className='form-group'>
                 <div className='form-label'>Domicile</div>
                 <input
                     type='text'
@@ -126,9 +121,6 @@ function FormGroup(){
                     value={domicile}
                     onChange={handleChange}
                 />
-            </form>
-
-            <form className='form-group'>
                 <div className='form-label'>Phone Number</div>
                 <input
                     type='number'
@@ -139,9 +131,6 @@ function FormGroup(){
                     value={phone}
                     onChange={handleChange}
                 />
-            </form>
-
-            <form className='form-group'>
                 <div className='form-label'>Email</div>
                 <input
                     type='text'
@@ -152,9 +141,6 @@ function FormGroup(){
                     value={email}
                     onChange={handleChange}
                 />
-            </form>
-
-            <form className='form-group'>
                 <div className='form-label'>GitHub</div>
                 <input
                     type='text'
@@ -165,9 +151,6 @@ function FormGroup(){
                     value={git}
                     onChange={handleChange}
                 />
-            </form>
-
-            <form className='form-group'>
                 <div className='form-label'>Formal Photo</div>
                 <input
                     type='file'
