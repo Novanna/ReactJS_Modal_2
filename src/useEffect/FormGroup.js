@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 import Modal from 'react-modal';
 //import ModalCard from '../component/ModalCard';
-import ModalData from '../component/ModalData';
+import ModalData from './ModalData';
 import './FormGroup.css';
 
 function FormGroup(){
 
     const [formData, setFormData] = useState([])
+    //const [formFile, setFormFile] = useState('')
 
     const data = {
         uname:"",
@@ -22,13 +23,20 @@ function FormGroup(){
         setData] = useState(data);
 
     const handleChange = (e) => {
-        const {name, value} = e.target;
+        const {name, value} = e.target
         setData(formData => ({...formData, [name]: value}))
     }
 
+    // const addImgHandler = (e) => {
+    //     let src = setData(URL.createObjectURL(e.target.files[0]))
+    //     // const {name} = e.target;
+    //     setData(formData => ({...formData, [e.target.name]: src}))
+    // }
     const addImgHandler = (e) => {
-        let src = URL.createObjectURL(e.target.files[0])
-        setData(formData => ({...formData, [e.target.name]: src}))
+      let src = URL.createObjectURL(e.target.files[0])
+      // const {name} = e.target;
+      //setData({...formData, [e.target.name]: src})
+      setData(formData => ({...formData, [e.target.name]: src}))
     }
 
     const submitHandler = (e) => {
@@ -50,8 +58,9 @@ function FormGroup(){
             phone:"",
             email:"",
             git:"",
-            photo:""
+            photo:"",
         })
+        //setFormFile()
         setModalIsOpen(true)
         console.log(formData)
     }
@@ -81,8 +90,13 @@ function FormGroup(){
             git:'',
             photo:'',
         })
+        //setFormFile('')
         alert('Reset Modal Success!')
     }
+
+    // const toggle = (data) => {
+
+    // }
 
     return(
         <>
@@ -157,6 +171,7 @@ function FormGroup(){
                     className='form-file'
                     name='photo'
                     id='userphoto'
+                    //value={photo}
                     onChange={addImgHandler}
                 />
             </form>

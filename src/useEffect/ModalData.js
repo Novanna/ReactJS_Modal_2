@@ -1,7 +1,7 @@
 // import React, { useEffect } from 'react';
 import ModalCard from './ModalCard';
 import './ModalCard.css';
- 
+
 function ModalData(props){
     // useEffect(() => {
     //     console.log(props.data)
