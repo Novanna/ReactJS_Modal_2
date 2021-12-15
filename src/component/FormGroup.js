@@ -20,16 +20,28 @@ function FormGroup(){
 
     const [{uname,job,domicile,phone,email,git,photo}, 
         setData] = useState(data);
-
+    
     const handleChange = (e) => {
         const {name, value} = e.target;
         setData(formData => ({...formData, [name]: value}))
     }
+    // const handleChange = (e) => {
+    //     const {name, value} = e.target;
+    //     setData({...formData, [name]: value})
+    // }
+    // TRY TRY
+    // Kalau formData => dihilangkan, modal cuma mengoper data dari element terakhir yaitu foto
+    // yang lainnya, sebelum foto, itu jadi undefined
+    // so formData => ini akan collect semua value dari semua element di const data
 
     const addImgHandler = (e) => {
         let src = URL.createObjectURL(e.target.files[0])
         setData(formData => ({...formData, [e.target.name]: src}))
     }
+    // const addImgHandler = (e) => {
+    //     let src = URL.createObjectURL(e.target.files[0])
+    //     setData({...formData, [e.target.name]: src})
+    // }
 
     const submitHandler = (e) => {
         e.preventDefault();

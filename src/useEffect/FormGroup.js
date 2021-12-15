@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Modal from 'react-modal';
-//import ModalCard from '../component/ModalCard';
+//import ModalCard from './ModalCard';
 import ModalData from './ModalData';
 import './FormGroup.css';
 
@@ -17,10 +17,26 @@ function FormGroup(){
         email:"",
         git:"",
         photo:"",
+        //listData:[]
     }
 
+    // const [{uname,job,domicile,phone,email,git,photo,listData}, 
+    //     setData] = useState(data);
     const [{uname,job,domicile,phone,email,git,photo}, 
         setData] = useState(data);
+
+    // const toggle = (data) => {
+    //   setData({
+    //     uname:"",
+    //     job:"",
+    //     domicile:"",
+    //     phone:"",
+    //     email:"",
+    //     git:"",
+    //     photo:"",
+    //     listData:data
+    //   })
+    // }
 
     const handleChange = (e) => {
         const {name, value} = e.target
@@ -112,7 +128,7 @@ function FormGroup(){
                     value={uname}
                     onChange={handleChange}
                 />
-                <div className='form-label'>Current Job</div>
+                <div className='form-label'>Career Experience</div>
                 <select
                     className='form-select'
                     name='job'
@@ -125,6 +141,29 @@ function FormGroup(){
                     <option value="Fullstack Developer"> Fullstack Developer </option>
                     <option value="Data Scientist"> Data Scientist </option>
                 </select>
+                {/* Nyobain checkbox */}
+                {/* <div className='form-label'>Career Experience</div>
+                <label>
+                  <input 
+                    type ='checkbox' 
+                    className='form-checkbox'
+                    name='job'
+                    value= 'Tech Consultant'
+                    onChange={handleChange}
+                  />
+                  Tech Consultant
+                </label>
+                <label>
+                  <input 
+                    type ='checkbox' 
+                    className='form-checkbox'
+                    name='job'
+                    value= 'Product Researcher'
+                    onChange={handleChange}
+                  />
+                  Product Researcher
+                </label> */}
+                {/* Nyobain checkbox */}
                 <div className='form-label'>Domicile</div>
                 <input
                     type='text'
@@ -212,6 +251,7 @@ function FormGroup(){
                 email = {email}
                 git = {git}
                 photo = {photo}
+                //reset = {(data => {toggle(data)})}
             />
         </Modal>
         </>
