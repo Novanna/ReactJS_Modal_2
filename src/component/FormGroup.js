@@ -22,8 +22,8 @@ function FormGroup(){
         setData] = useState(data);
     
     const handleChange = (e) => {
-        const {name, value} = e.target;
-        setData(formData => ({...formData, [name]: value}))
+        // const {name, value} = e.target;
+        setData(formData => ({...formData, [e.target.name]: e.target.value}))
     }
     // const handleChange = (e) => {
     //     const {name, value} = e.target;
@@ -33,6 +33,7 @@ function FormGroup(){
     // Kalau formData => dihilangkan, modal cuma mengoper data dari element terakhir yaitu foto
     // yang lainnya, sebelum foto, itu jadi undefined
     // so formData => ini akan collect semua value dari semua element di const data
+    // sehingga setData akan menyimpan value2 di formData secara lengkap, bukan elemnet terakhir aja
 
     const addImgHandler = (e) => {
         let src = URL.createObjectURL(e.target.files[0])
@@ -77,22 +78,15 @@ function FormGroup(){
         }
     }
 
-    const closeHandler = () => {
+    const closeHandler = (e) => {
+        e.preventDefault([])
         setModalIsOpen(false)
     }
 
     const resetHandler = (e) => {
         e.preventDefault();
         setFormData([])
-        setData({
-            uname: '',
-            job: '',
-            domicile: '',
-            phone:'',
-            email:'',
-            git:'',
-            photo:'',
-        })
+        setData(formData => ({...formData, [e.target.name]: ''}))
         alert('Reset Modal Success!')
     }
 
